@@ -46,26 +46,13 @@ faders.forEach(fader => {
 fetch('https://api.quotable.io/quotes/random')
     .then(response => response.json())
     .then(data => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        const randomQuote = data[randomIndex];
+        // Since the response is an array, we need to get the first element
+        const quote = data[0];
         const quoteDiv = document.getElementById('quote');
-        quoteDiv.innerHTML = `<p>"${randomQuote.text}"</p><p class="author">- ${randomQuote.author || 'Ismeretlen szerző'}</p>`;
+        quoteDiv.innerHTML = `<p>"${quote.content}"</p><p class="author">- ${quote.author}</p>`;
     })
     .catch(error => {
         console.error('Hiba az idézet lekérésekor:', error);
         const quoteDiv = document.getElementById('quote');
         quoteDiv.innerHTML = `<p>"A kreativitás intelligencia, ami szórakozik."</p><p class="author">- Albert Einstein</p>`;
     });
-
-// Service Worker regisztrálása a PWA funkciókhoz
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-        .then(registration => {
-            console.log('Service Worker regisztrálva:', registration);
-        })
-        .catch(error => {
-            console.log('Service Worker regisztráció sikertelen:', error);
-        });
-    });
-}
