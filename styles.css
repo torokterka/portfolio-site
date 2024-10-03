@@ -94,6 +94,24 @@ nav ul li a:hover {
     transform: translateY(0);
 }
 
+/* Random Idézet Stílus */
+#quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    padding: 20px;
+}
+
+#quote p {
+    margin: 0;
+}
+
+#quote .author {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-style: normal;
+    color: #6B9080;
+}
+
 /* Parallax Háttér */
 .parallax {
     background-image: url('images/background.jpg');
