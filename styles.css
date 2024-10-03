@@ -1,0 +1,148 @@
+/* Általános Stílusok */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #223d3c; /* Elsődleges szín */
+    background-color: #ffffff; /* Fehér háttér */
+    scroll-behavior: smooth;
+}
+
+/* Neumorphism Stílus */
+.shadow-neumorphism {
+    box-shadow: 8px 8px 16px #c5c5c2, -8px -8px 16px #ffffff;
+}
+
+.shadow-neumorphism-hover {
+    box-shadow: inset 8px 8px 16px #c5c5c2, inset -8px -8px 16px #ffffff;
+}
+
+.shadow-neumorphism-button {
+    box-shadow: 4px 4px 8px #c5c5c2, -4px -4px 8px #ffffff;
+}
+
+h1, h2, h3 {
+    color: #223d3c;
+}
+
+p {
+    color: #223d3c;
+}
+
+a {
+    text-decoration: none;
+    color: #223d3c;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 10px 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #6B9080;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.primary-button {
+    background-color: #6B9080;
+    color: #ffffff;
+}
+
+.primary-button:hover {
+    background-color: #A4C3B2;
+    color: #223d3c;
+}
+
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Parallax Háttér */
+.parallax {
+    background-image: url('images/background.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Microinteractions */
+a:hover, button:hover {
+    transform: scale(1.05);
+}
+
+.project-item:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-header h2 {
+        text-align: center;
+    }
+
+    .home-container {
+        flex-direction: column;
+    }
+
+    .home-text {
+        text-align: center;
+    }
+
+    .project-item img {
+        height: 150px;
+    }
+
+    .logo-image {
+        height: 60px;
+    }
+
+    .section-header h2 {
+        font-size: 2.5em;
+    }
+}
