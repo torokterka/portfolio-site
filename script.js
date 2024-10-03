@@ -42,26 +42,20 @@ faders.forEach(fader => {
     appearOnScroll.observe(fader);
 });
 
-// Microinteractions
-const buttons = document.querySelectorAll('a, button');
-
-buttons.forEach(button => {
-    button.addEventListener('mouseover', () => {
-        button.classList.add('hovered');
+// Random Idézet API integrációja
+fetch('https://api.quotable.io/quotes/random')
+    .then(response => response.json())
+    .then(data => {
+        const randomIndex = Math.floor(Math.random() * data.length);
+        const randomQuote = data[randomIndex];
+        const quoteDiv = document.getElementById('quote');
+        quoteDiv.innerHTML = `<p>"${randomQuote.text}"</p><p class="author">- ${randomQuote.author || 'Ismeretlen szerző'}</p>`;
+    })
+    .catch(error => {
+        console.error('Hiba az idézet lekérésekor:', error);
+        const quoteDiv = document.getElementById('quote');
+        quoteDiv.innerHTML = `<p>"A kreativitás intelligencia, ami szórakozik."</p><p class="author">- Albert Einstein</p>`;
     });
-    button.addEventListener('mouseout', () => {
-        button.classList.remove('hovered');
-    });
-});
-
-// Parallax Effektus
-window.addEventListener('scroll', function() {
-    const parallax = document.querySelector('.parallax');
-    if (parallax) {
-        let scrollPosition = window.pageYOffset;
-        parallax.style.backgroundPositionY = (scrollPosition * 0.5) + 'px';
-    }
-});
 
 // Service Worker regisztrálása a PWA funkciókhoz
 if ('serviceWorker' in navigator) {
