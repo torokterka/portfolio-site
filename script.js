@@ -7,12 +7,18 @@ document.getElementById('menu-button').addEventListener('click', () => {
 // Back to Top gomb kezelése
 const backToTopButton = document.getElementById('back-to-top');
 
+let scrollTimeout;
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopButton.classList.remove('hidden');
-    } else {
-        backToTopButton.classList.add('hidden');
+    if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
     }
+    scrollTimeout = setTimeout(() => {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.remove('hidden');
+        } else {
+            backToTopButton.classList.add('hidden');
+        }
+    }, 100); // Debounce delay of 100ms
 });
 
 backToTopButton.addEventListener('click', () => {
@@ -43,16 +49,23 @@ faders.forEach(fader => {
 });
 
 // Random Idézet API integrációja
-fetch('http://api.quotable.io/quotes/random')
-    .then(response => response.json())
+const quoteDiv = document.getElementById('quote');
+const defaultQuote = {
+    content: "A kreativitás intelligencia, ami szórakozik.",
+    author: "Albert Einstein"
+};
+
+fetch('https://api.quotable.io/random')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
-        // Since the response is an array, we need to get the first element
-        const quote = data[0];
-        const quoteDiv = document.getElementById('quote');
-        quoteDiv.innerHTML = `<p>"${quote.content}"</p><p class="author">- ${quote.author}</p>`;
+        quoteDiv.innerHTML = `<p>"${data.content}"</p><p class="author">- ${data.author}</p>`;
     })
     .catch(error => {
         console.error('Hiba az idézet lekérésekor:', error);
-        const quoteDiv = document.getElementById('quote');
-        quoteDiv.innerHTML = `<p>"A kreativitás intelligencia, ami szórakozik."</p><p class="author">- Albert Einstein</p>`;
+        quoteDiv.innerHTML = `<p>"${defaultQuote.content}"</p><p class="author">- ${defaultQuote.author}</p>`;
     });
