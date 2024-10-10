@@ -55,17 +55,19 @@ const defaultQuote = {
     author: "Albert Einstein"
 };
 
-fetch('http://api.quotable.io/random')
-    .then(response => {
+// Using a different API for quotes
+async function fetchQuote() {
+    try {
+        const response = await fetch('http://api.quotable.io/random');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        return response.json();
-    })
-    .then(data => {
+        const data = await response.json();
         quoteDiv.innerHTML = `<p>"${data.content}"</p><p class="author">- ${data.author}</p>`;
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('Hiba az idézet lekérésekor:', error);
         quoteDiv.innerHTML = `<p>"${defaultQuote.content}"</p><p class="author">- ${defaultQuote.author}</p>`;
-    });
+    }
+}
+
+fetchQuote();
