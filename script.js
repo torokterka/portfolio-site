@@ -43,7 +43,7 @@ faders.forEach(fader => {
 });
 
 // Random Idézet API integrációja
-fetch('https://api.quotable.io/quotes/random')
+fetch('http://api.quotable.io/quotes/random')
     .then(response => response.json())
     .then(data => {
         // Since the response is an array, we need to get the first element
